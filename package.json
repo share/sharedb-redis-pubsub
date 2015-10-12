@@ -1,6 +1,6 @@
 {
   "name": "sharedb-redis-pubsub",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Redis pub/sub adapter adapter for ShareDB",
   "main": "index.js",
   "dependencies": {
