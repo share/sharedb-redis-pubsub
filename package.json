@@ -4,6 +4,7 @@
   "description": "Redis pub/sub adapter adapter for ShareDB",
   "main": "index.js",
   "dependencies": {
+    "async": "^1.5.0",
     "redis": "^2.1.0",
     "sharedb": "^0.9.0"
   },
