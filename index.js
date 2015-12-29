@@ -29,10 +29,19 @@ module.exports = RedisPubSub;
 RedisPubSub.prototype = Object.create(PubSub.prototype);
 
 RedisPubSub.prototype.close = function(callback) {
-  PubSub.prototype.close.call(this);
-  this.client.quit();
-  this.observer.quit();
-  if (callback) callback();
+  if (!callback) {
+    callback = function(err) {
+      if (err) throw err;
+    };
+  }
+  var pubsub = this;
+  PubSub.prototype.close.call(this, function(err) {
+    if (err) return callback(err);
+    pubsub.client.quit(function(err) {
+      if (err) return callback(err);
+      pubsub.observer.quit(callback);
+    });
+  });
 };
 
 RedisPubSub.prototype._subscribe = function(channel, callback) {
