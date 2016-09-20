@@ -5,11 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "async": "^1.5.0",
-    "redis": "^2.1.0",
+    "redis": "^2.6.0",
     "sharedb": "^1.0.0-beta"
-  },
-  "optionalDependencies": {
-    "hiredis": "^0.4.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.8",
