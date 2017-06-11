@@ -4,15 +4,15 @@
   "description": "Redis pub/sub adapter adapter for ShareDB",
   "main": "index.js",
   "dependencies": {
-    "async": "^1.5.0",
-    "redis": "^2.6.0",
+    "async": "^2.4.1",
+    "redis": "^2.7.1",
     "sharedb": "^1.0.0-beta"
   },
   "devDependencies": {
     "coveralls": "^2.11.8",
     "expect.js": "^0.3.1",
     "istanbul": "^0.4.2",
-    "mocha": "^2.3.3"
+    "mocha": "^3.4.2"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
