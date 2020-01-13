@@ -13,7 +13,8 @@ This ShareDB add-on gives you horizontal scalability; the ability to have a clus
 This snippet shows how to load this library and pass it into a new ShareDB instance.
 
 ```js
-var redisPubsub = require('sharedb-redis-pubsub')({client:redisClient}); // Redis client being an existing redis client connection
+// Redis client is an existing redis client connection
+var redisPubsub = require('sharedb-redis-pubsub')({client: redisClient});
 
 var backend = new ShareDB({
   db: db,  // db would be your mongo db or other storage location
