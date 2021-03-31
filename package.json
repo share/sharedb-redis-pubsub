@@ -11,10 +11,13 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.7",
+    "eslint": "^7.23.0",
+    "eslint-config-google": "^0.14.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1"
   },
   "scripts": {
+    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore '**/*.js'",
     "test": "mocha",
     "test-cover": "nyc --temp-dir=coverage -r text -r lcov npm test"
   },
