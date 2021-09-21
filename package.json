@@ -4,7 +4,6 @@
   "description": "Redis pub/sub adapter adapter for ShareDB",
   "main": "index.js",
   "dependencies": {
-    "async": "^1.5.0",
     "redis": "^2.6.0 || ^3.0.0",
     "sharedb": "^1.0.0 || ^2.0.0"
   },
@@ -13,8 +12,8 @@
     "coveralls": "^3.0.7",
     "eslint": "^7.23.0",
     "eslint-config-google": "^0.14.0",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1"
+    "mocha": "^9.1.1",
+    "nyc": "^15.1.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --ignore-path .gitignore '**/*.js'",
