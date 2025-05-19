@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Node.js ${{ matrix.node }}
+    name: Node.js ${{ matrix.node }} - Redis ${{ matrix.redis }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -18,6 +18,11 @@ jobs:
         - 16
         - 18
         - 20
+        - 22
+        - 24
+        redis:
+        - 4
+        - 5
     services:
       redis:
         image: redis
@@ -31,6 +36,8 @@ jobs:
         node-version: ${{ matrix.node }}
     - name: Install
       run: npm install
+    - name: Install correct redis version
+      run: npm install redis@${{ matrix.redis }}
     - name: Lint
       run: npm run lint
     - name: Test

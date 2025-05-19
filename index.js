@@ -43,8 +43,8 @@ RedisPubSub.prototype.close = function(callback) {
 
 RedisPubSub.prototype._close = function() {
   return this._closing = this._closing || this._connect().then(Promise.all([
-    this.client.quit(),
-    this.observer.quit()
+    close(this.client),
+    close(this.observer)
   ]));
 };
 
@@ -92,3 +92,11 @@ var PUBLISH_SCRIPT =
   'for i = 2, #ARGV do ' +
     'redis.call("publish", ARGV[i], ARGV[1]) ' +
   'end';
+
+function close(client) {
+  if (client.close) {
+    return client.close();
+  }
+
+  return client.quit();
+}
