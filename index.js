@@ -26,65 +26,65 @@ module.exports = RedisPubSub;
 
 RedisPubSub.prototype = Object.create(PubSub.prototype);
 
-RedisPubSub.prototype.close = function (callback) {
+RedisPubSub.prototype.close = function(callback) {
   if (!callback) {
-    callback = function (err) {
+    callback = function(err) {
       if (err) throw err;
     };
   }
   var pubsub = this;
-  PubSub.prototype.close.call(this, function (err) {
+  PubSub.prototype.close.call(this, function(err) {
     if (err) return callback(err);
-    pubsub._close().then(function () {
+    pubsub._close().then(function() {
       callback();
     }, callback);
   });
 };
 
-RedisPubSub.prototype._close = function () {
+RedisPubSub.prototype._close = function() {
   var pubsub = this;
 
-  if(!this._closing) {
+  if (!this._closing) {
     this._closing = this._connect()
-      .then(function () {
+      .then(function() {
         return Promise.all([
           close(pubsub.client),
           close(pubsub.observer)
-        ])
+        ]);
       });
   }
 
   return this._closing;
 };
 
-RedisPubSub.prototype._subscribe = function (channel, callback) {
+RedisPubSub.prototype._subscribe = function(channel, callback) {
   var pubsub = this;
   pubsub.observer
-    .subscribe(channel, function (message) {
+    .subscribe(channel, function(message) {
       var data = JSON.parse(message);
       pubsub._emit(channel, data);
     })
-    .then(function () {
+    .then(function() {
       callback();
     }, callback);
 };
 
-RedisPubSub.prototype._unsubscribe = function (channel, callback) {
+RedisPubSub.prototype._unsubscribe = function(channel, callback) {
   this.observer.unsubscribe(channel)
-    .then(function () {
+    .then(function() {
       callback();
     }, callback);
 };
 
-RedisPubSub.prototype._publish = function (channels, data, callback) {
+RedisPubSub.prototype._publish = function(channels, data, callback) {
   var message = JSON.stringify(data);
   var args = [message].concat(channels);
-  this.client.eval(PUBLISH_SCRIPT, { arguments: args }).then(function () {
+  this.client.eval(PUBLISH_SCRIPT, {arguments: args}).then(function() {
     callback();
   }, callback);
 };
 
-RedisPubSub.prototype._connect = function () {
+RedisPubSub.prototype._connect = function() {
   this._clientConnection = this._clientConnection || connect(this.client);
   this._observerConnection = this._observerConnection || connect(this.observer);
   return Promise.all([
