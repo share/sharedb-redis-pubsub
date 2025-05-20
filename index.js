@@ -107,5 +107,7 @@ function close(client) {
     return client.close();
   }
 
+  // The quit is deprecated for node redis >= 5.0.0
+  // This call should be removed after we stop supporting redis < 5.0.0
   return client.quit();
 }
