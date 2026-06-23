@@ -103,6 +103,8 @@ var PUBLISH_SCRIPT =
   'end';
 
 function close(client) {
+  if (!client.isOpen) return Promise.resolve();
+
   if (client.close) {
     return client.close();
   }
