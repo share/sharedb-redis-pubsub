@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
         node:
-        - 16
-        - 18
-        - 20
+        - 22
+        - 24
+        - 26
         redis:
         - 4
         - 5
