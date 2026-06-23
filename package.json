@@ -13,7 +13,7 @@
     "eslint": "^7.23.0",
     "eslint-config-google": "^0.14.0",
     "mocha": "^9.1.1",
-    "nyc": "^15.1.0"
+    "nyc": "^18.0.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --ignore-path .gitignore '**/*.js'",
