@@ -1,3 +1,5 @@
+var google = require('eslint-config-google');
+
 // The ESLint ecmaVersion argument is inconsistently used. Some rules will ignore it entirely, so if the rule has
 // been set, it will still error even if it's not applicable to that version number. Since Google sets these
 // rules, we have to turn them off ourselves.
@@ -37,14 +39,21 @@ var SHAREDB_RULES = {
   'valid-jsdoc': 'off'
 };
 
-module.exports = {
-  extends: 'google',
-  parserOptions: {
-    ecmaVersion: 3
+module.exports = [
+  {
+    ignores: ['node_modules/**', 'coverage/**']
   },
-  rules: Object.assign(
-    {},
-    DISABLED_ES6_OPTIONS,
-    SHAREDB_RULES
-  )
-};
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      ecmaVersion: 3,
+      sourceType: 'commonjs'
+    },
+    rules: Object.assign(
+      {},
+      google.rules,
+      DISABLED_ES6_OPTIONS,
+      SHAREDB_RULES
+    )
+  }
+];
